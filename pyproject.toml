@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "afrikaans-asr"
+version = "0.1.0"
+description = "Framework for mapping, validating, and fine-tuning Afrikaans Whisper ASR models."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "accelerate>=0.30",
+    "datasets>=2.19",
+    "evaluate>=0.4",
+    "huggingface_hub>=0.23",
+    "jiwer>=3.0",
+    "librosa>=0.10",
+    "numpy>=1.24",
+    "peft>=0.11",
+    "pyyaml>=6.0",
+    "sentencepiece>=0.2",
+    "soundfile>=0.12",
+    "torch>=2.2",
+    "transformers>=4.41",
+]
+
+[project.optional-dependencies]
+dev = ["ruff>=0.4"]
+
+[project.scripts]
+afrikaans-asr-map = "afrikaans_asr.mapping:main"
+afrikaans-asr-validate = "afrikaans_asr.validate:main"
+afrikaans-asr-train = "afrikaans_asr.train_lora:main"
+afrikaans-asr-upload = "afrikaans_asr.upload:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

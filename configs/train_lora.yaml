@@ -1,0 +1,44 @@
+model:
+  id: openai/whisper-large-v3
+  language: af
+  task: transcribe
+  torch_dtype: bfloat16
+  device_map: auto
+
+data:
+  mapped_dataset: rareRabbit/afrikaans-asr-mapped-largev3
+  train_split: train
+  validation_split: validation
+
+lora:
+  r: 32
+  lora_alpha: 64
+  lora_dropout: 0.05
+  bias: none
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - out_proj
+
+training:
+  output_dir: /content/drive/MyDrive/Afrikaans_training_model/whisper-afrikaans-largev3-run
+  per_device_train_batch_size: 10
+  per_device_eval_batch_size: 8
+  gradient_accumulation_steps: 1
+  learning_rate: 0.00002
+  lr_scheduler_type: cosine
+  warmup_ratio: 0.05
+  max_steps: 6000
+  eval_steps: 1000
+  save_steps: 2000
+  save_total_limit: 1
+  generation_max_length: 225
+  generation_num_beams: 1
+  gradient_checkpointing: true
+  report_to: none
+
+hub:
+  push_to_hub: true
+  model_id: rareRabbit/whisper-largev3-afrikaans-lora
+  private: true

@@ -1,0 +1,25 @@
+model:
+  id: openai/whisper-large-v3
+  language: af
+  task: transcribe
+
+data:
+  raw_root: /content/drive/MyDrive/Afrikaans_training_model/datasets_general_v1
+  mapped_root: /content/mapped_largev3_general_v1
+  train_split_dir: train
+  validation_split_dir: val
+  mapped_train_split_dir: train
+  mapped_validation_split_dir: validation
+  text_column: text
+  audio_column: audio
+
+mapping:
+  num_proc: 1
+  max_label_length: 225
+  overwrite: false
+  load_from_cache_file: false
+
+hub:
+  dataset_id: rareRabbit/afrikaans-asr-mapped-largev3
+  private: false
+  num_workers: 8
